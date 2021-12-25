@@ -48,6 +48,45 @@ class RadioTest {
     }
 
     @Test
+    void shouldAddUnderMinNumberOfStation() {
+        int stationNumber = -1;
+        radio.setNumberOfRadioStation(stationNumber);
+        int expected = 0;
+        int actual = radio.getCurrentOfRadioStation();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldAddUpperMaxNumberOfStation() {
+        int stationNumber = 10;
+        radio.setNumberOfRadioStation(stationNumber);
+        int expected = 0;
+        int actual = radio.getCurrentOfRadioStation();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldSetUpperMaxVolume(){
+        radio.setCurrentVolume(11);
+        int expected = 0;
+        int actual = radio.getCurrentVolume();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldSetUnderMinVolume(){
+        radio.setCurrentVolume(-1);
+        int expected = 0;
+        int actual = radio.getCurrentVolume();
+
+        assertEquals(expected, actual);
+    }
+
+
+    @Test
     void shouldReduceVolume() {
         radio.setCurrentVolume(9);
         int expected = radio.getCurrentVolume() - 1;
@@ -59,8 +98,19 @@ class RadioTest {
 
     @Test
     void shouldIncreaseVolume() {
-        radio.setCurrentVolume(9);
+        radio.setCurrentVolume(0);
         int expected = radio.getCurrentVolume() + 1;
+        radio.increaseVolume();
+        int actual = radio.getCurrentVolume();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldIncreaseMaxVolume() {
+        int volumeLevel = 10;
+        radio.setCurrentVolume(volumeLevel);
+        int expected = volumeLevel;
         radio.increaseVolume();
         int actual = radio.getCurrentVolume();
 
