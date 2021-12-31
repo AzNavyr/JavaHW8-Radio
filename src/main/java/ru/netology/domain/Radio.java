@@ -23,11 +23,10 @@ public class Radio {
     }
 
     public int nextRadioStation() {
-        if (currentOfRadioStation < 10) {
+        if (currentOfRadioStation < maxRadioStation) {
             currentOfRadioStation = currentOfRadioStation + 1;
-        }
-        if (currentOfRadioStation > maxRadioStation) {
-            currentOfRadioStation = 0;
+        } else {
+            currentOfRadioStation = minRadioStation;
         }
         return currentOfRadioStation;
     }
@@ -55,6 +54,14 @@ public class Radio {
         return currentVolume;
     }
 
+    public int getMinVolume() {
+        return minVolume;
+    }
+
+    public int getMaxVolume() {
+        return maxVolume;
+    }
+
     public void setCurrentVolume(int currentVolume) {
         if (currentVolume > maxVolume) {
             return;
@@ -76,6 +83,8 @@ public class Radio {
     public void reduceVolume() {
         if (currentVolume > minVolume) {
             currentVolume = currentVolume - 1;
+        } else {
+            currentVolume = minVolume;
         }
     }
 }

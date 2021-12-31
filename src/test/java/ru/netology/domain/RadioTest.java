@@ -8,9 +8,19 @@ class RadioTest {
     Radio radio = new Radio();
 
     @Test
-    void shouldTestNextRadioStation() {
+    void shouldTestMaxNextRadioStation() {
         radio.setNumberOfRadioStation(9);
         int expected = radio.getMinRadioStation();
+        radio.nextRadioStation();
+        int actual = radio.getCurrentOfRadioStation();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldTestMinNextRadioStation() {
+        radio.setNumberOfRadioStation(2);
+        int expected = radio.getCurrentOfRadioStation() + 1;
         radio.nextRadioStation();
         int actual = radio.getCurrentOfRadioStation();
 
@@ -68,7 +78,7 @@ class RadioTest {
     }
 
     @Test
-    void shouldSetUpperMaxVolume(){
+    void shouldSetUpperMaxVolume() {
         radio.setCurrentVolume(11);
         int expected = 0;
         int actual = radio.getCurrentVolume();
@@ -77,7 +87,7 @@ class RadioTest {
     }
 
     @Test
-    void shouldSetUnderMinVolume(){
+    void shouldSetUnderMinVolume() {
         radio.setCurrentVolume(-1);
         int expected = 0;
         int actual = radio.getCurrentVolume();
@@ -87,8 +97,8 @@ class RadioTest {
 
 
     @Test
-    void shouldReduceVolume() {
-        radio.setCurrentVolume(9);
+    void shouldMaxReduceVolume() {
+        radio.setCurrentVolume(10);
         int expected = radio.getCurrentVolume() - 1;
         radio.reduceVolume();
         int actual = radio.getCurrentVolume();
@@ -97,7 +107,17 @@ class RadioTest {
     }
 
     @Test
-    void shouldIncreaseVolume() {
+    void shouldMinReduceVolume() {
+        radio.setCurrentVolume(0);
+        int expected = radio.getMinVolume();
+        radio.reduceVolume();
+        int actual = radio.getCurrentVolume();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldIncreaseMinVolume() {
         radio.setCurrentVolume(0);
         int expected = radio.getCurrentVolume() + 1;
         radio.increaseVolume();
@@ -110,7 +130,7 @@ class RadioTest {
     void shouldIncreaseMaxVolume() {
         int volumeLevel = 10;
         radio.setCurrentVolume(volumeLevel);
-        int expected = volumeLevel;
+        int expected = radio.getMaxVolume();
         radio.increaseVolume();
         int actual = radio.getCurrentVolume();
 
