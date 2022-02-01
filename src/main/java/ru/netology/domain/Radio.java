@@ -2,64 +2,73 @@ package ru.netology.domain;
 
 
 public class Radio {
-    private int maxRadioStation = 9;
-    private int minRadioStation = 0;
-    private int currentOfRadioStation = minRadioStation;
+    private int maximumCount = 9;
+    private int minimumCount = 0;
 
-    private int maxVolume = 10;
+    private int currentOfRadioStation;
+
+    private int maxVolume = 100;
     private int minVolume = 0;
-    private int currentVolume = minVolume;
+    private int currentVolume;
+
+
+    public Radio() {
+    }
+
+    public Radio(int maximumCount) {
+
+        this.maximumCount = maximumCount;
+    }
 
     public int getCurrentOfRadioStation() {
+
         return currentOfRadioStation;
     }
 
-    public int getMaxRadioStation() {
-        return maxRadioStation;
+    public int getMaximumCount() {
+        return maximumCount;
     }
 
-    public int getMinRadioStation() {
-        return minRadioStation;
+    public int getMinimumCount() {
+        return minimumCount;
     }
 
     public int nextRadioStation() {
-        if (currentOfRadioStation < maxRadioStation) {
+        if (currentOfRadioStation < maximumCount + 1) {
             currentOfRadioStation = currentOfRadioStation + 1;
         } else {
-            currentOfRadioStation = minRadioStation;
+            currentOfRadioStation = minimumCount + 1;
         }
         return currentOfRadioStation;
     }
 
     public int prevRadioStation() {
         if (currentOfRadioStation < 1) {
-            currentOfRadioStation = maxRadioStation;
+            currentOfRadioStation = maximumCount + 1;
         } else {
             currentOfRadioStation = currentOfRadioStation - 1;
         }
         return currentOfRadioStation;
     }
 
-    public void setNumberOfRadioStation(int currentOfRadioStations) {
-        if (currentOfRadioStations > maxRadioStation) {
+    public void setCountOfRadioStation(int countOfRadioStations) {
+        if (countOfRadioStations > (getMaximumCount() + 1)) {
             return;
         }
-        if (currentOfRadioStations < minRadioStation) {
+        if (countOfRadioStations < (getMinimumCount() + 1)) {
             return;
         }
-        this.currentOfRadioStation = currentOfRadioStations;
+        this.currentOfRadioStation = countOfRadioStations + 1;
     }
 
     public int getCurrentVolume() {
+
         return currentVolume;
     }
 
     public int getMinVolume() {
-        return minVolume;
-    }
 
-    public int getMaxVolume() {
-        return maxVolume;
+        return minVolume;
     }
 
     public void setCurrentVolume(int currentVolume) {
